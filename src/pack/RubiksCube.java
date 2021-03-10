@@ -83,5 +83,36 @@ public class RubiksCube {
     	return toReturn;
     	
     }
+    
+    //0 -> 2 -> 8 -> 6
+    //1 -> 5 -> 7 -> 4
+    private void rotateSide(int side, boolean clockwise) {
+    	
+    	char temp1 = cube[side][0];
+    	char temp2 = cube[side][1];
+    	
+    	if (clockwise) {
+        	cube[side][0] = cube[side][2];
+        	cube[side][2] = cube[side][8];
+        	cube[side][8] = cube[side][6];
+        	cube[side][6] = temp1;
+        	
+        	cube[side][1] = cube[side][5];
+        	cube[side][5] = cube[side][7];
+        	cube[side][7] = cube[side][4];
+        	cube[side][4] = temp2;
+    	} else {
+        	cube[side][0] = cube[side][6];
+        	cube[side][6] = cube[side][8];
+        	cube[side][8] = cube[side][2];
+        	cube[side][2] = temp1;
+        	
+        	cube[side][1] = cube[side][4];
+        	cube[side][4] = cube[side][7];
+        	cube[side][7] = cube[side][5];
+        	cube[side][5] = temp2;
+    	}
+    	
+    }
 
 }
