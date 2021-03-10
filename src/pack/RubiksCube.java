@@ -2,7 +2,9 @@ package pack;
 
 public class RubiksCube {    
     //TODO Create a data structure for the cube faces
-
+	
+	private char[][] cube;
+	
     public RubiksCube() {
 
     }
