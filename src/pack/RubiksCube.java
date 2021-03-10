@@ -1,12 +1,20 @@
 package pack;
 
 public class RubiksCube {    
-    //TODO Create a data structure for the cube faces
 	
 	private char[][] cube;
 	
     public RubiksCube() {
-
+    	cube = new char[6][9];
+    	
+    	//Order: left, front, right, back, top, bottom
+    	char[] colors = new char[] {'G', 'R', 'B', 'O', 'W', 'Y'};
+    	
+    	for (int i = 0; i < cube.length; i++) {
+    		for (int j = 0; j < cube[0].length; j++) {
+    			cube[i][j] = colors[i];
+    		}
+    	}
     }
 
     //Moves for a Rubiks Cube
@@ -59,6 +67,21 @@ public class RubiksCube {
 
     public void move_Bp() {
         
+    }
+    
+    @Override
+    public String toString() {
+		
+    	String toReturn = "";
+    	
+    	for (int i = 0; i < cube.length; i++) {
+    		for (int j = 0; j < cube[0].length; j++) {
+    			toReturn = toReturn + cube[i][j];
+    		}
+    	}
+    	
+    	return toReturn;
+    	
     }
 
 }
