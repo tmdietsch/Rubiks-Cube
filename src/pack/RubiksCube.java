@@ -125,6 +125,19 @@ public class RubiksCube {
     	char temp2 = cube[side][1];
     	
     	if (clockwise) {
+    		
+        	cube[side][0] = cube[side][6];
+        	cube[side][6] = cube[side][8];
+        	cube[side][8] = cube[side][2];
+        	cube[side][2] = temp1;
+        	
+        	cube[side][1] = cube[side][3];
+        	cube[side][3] = cube[side][7];
+        	cube[side][7] = cube[side][5];
+        	cube[side][5] = temp2;
+        	
+    	} else {
+
         	cube[side][0] = cube[side][2];
         	cube[side][2] = cube[side][8];
         	cube[side][8] = cube[side][6];
@@ -132,18 +145,8 @@ public class RubiksCube {
         	
         	cube[side][1] = cube[side][5];
         	cube[side][5] = cube[side][7];
-        	cube[side][7] = cube[side][4];
-        	cube[side][4] = temp2;
-    	} else {
-        	cube[side][0] = cube[side][6];
-        	cube[side][6] = cube[side][8];
-        	cube[side][8] = cube[side][2];
-        	cube[side][2] = temp1;
-        	
-        	cube[side][1] = cube[side][4];
-        	cube[side][4] = cube[side][7];
-        	cube[side][7] = cube[side][5];
-        	cube[side][5] = temp2;
+        	cube[side][7] = cube[side][3];
+        	cube[side][3] = temp2;
     	}
     	
     }
