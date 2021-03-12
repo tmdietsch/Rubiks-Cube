@@ -130,16 +130,77 @@ public class RubiksCube {
     //index 3
     public void move_Bp() {
     	rotateFace(3, false);
+    	
+    	char temp1 = cube[4][0];
+    	char temp2 = cube[4][1];
+    	char temp3 = cube[4][2];
+    	
+    	cube[4][0] = cube[0][6];
+    	cube[4][1] = cube[0][3];
+    	cube[4][2] = cube[0][0];
+    	
+    	cube[0][6] = cube[5][8];
+    	cube[0][3] = cube[5][7];
+    	cube[0][0] = cube[5][6];
+    	
+    	cube[5][8] = cube[2][2];
+    	cube[5][7] = cube[2][5];
+    	cube[5][6] = cube[2][8];
+    	
+    	cube[2][2] = temp1;
+    	cube[2][5] = temp2;
+    	cube[2][8] = temp3;
     }
     
     //index 4
     public void move_Up() {
     	rotateFace(4, false);
+    	
+    	char temp1 = cube[3][0];
+    	char temp2 = cube[3][1];
+    	char temp3 = cube[3][2];
+    	
+    	cube[3][0] = cube[2][0];
+    	cube[3][1] = cube[2][1];
+    	cube[3][2] = cube[2][2];
+    	
+    	cube[2][0] = cube[1][0];
+    	cube[2][1] = cube[1][1];
+    	cube[2][2] = cube[1][2];
+    	
+    	cube[1][0] = cube[0][0];
+    	cube[1][1] = cube[0][1];
+    	cube[1][2] = cube[0][2];
+    	
+    	cube[0][0] = temp1;
+    	cube[0][1] = temp2;
+    	cube[0][2] = temp3;
+    	
     }
     
     //index 5
     public void move_Dp() {
     	rotateFace(5, false);
+    	
+    	char temp1 = cube[1][6];
+    	char temp2 = cube[1][7];
+    	char temp3 = cube[1][8];
+    	
+    	cube[1][6] = cube[2][6];
+    	cube[1][7] = cube[2][7];
+    	cube[1][8] = cube[2][8];
+    	
+    	cube[2][6] = cube[3][6];
+    	cube[2][7] = cube[3][7];
+    	cube[2][8] = cube[3][8];
+    	
+    	cube[3][6] = cube[0][6];
+    	cube[3][7] = cube[0][7];
+    	cube[3][8] = cube[0][8];
+    	
+    	cube[0][6] = temp1;
+    	cube[0][7] = temp2;
+    	cube[0][8] = temp3;
     }
     
     @Override
