@@ -98,7 +98,7 @@ public class RubiksCube {
     
     //index 3
     public void move_B() {
-        
+    	rotateFace(3, true);
     	
     	char temp2 = cube[2][2];
     	char temp5 = cube[2][5];
