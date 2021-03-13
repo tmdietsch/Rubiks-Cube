@@ -148,7 +148,27 @@ public class RubiksCube {
     
     //index 5
     public void move_D() {
+    	rotateFace(5, true);
     	
+    	char temp2 = cube[2][2];
+    	char temp1 = cube[2][1];
+    	char temp0 = cube[2][0];
+    	
+    	cube[2][2] = cube[3][2];
+    	cube[2][1] = cube[3][1];
+    	cube[2][0] = cube[3][0];
+    	
+    	cube[3][2] = cube[0][2];
+    	cube[3][1] = cube[0][1];
+    	cube[3][0] = cube[0][0];
+    	
+    	cube[0][2] = cube[1][2];
+    	cube[0][1] = cube[1][1];
+    	cube[0][0] = cube[1][0];
+    	
+    	cube[1][2] = temp2;
+    	cube[1][1] = temp1;
+    	cube[1][0] = temp0;
     }
 
     //Inverse moves, p stands for prime
