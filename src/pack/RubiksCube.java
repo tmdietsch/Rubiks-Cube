@@ -99,6 +99,26 @@ public class RubiksCube {
     //index 3
     public void move_B() {
         
+    	
+    	char temp2 = cube[2][2];
+    	char temp5 = cube[2][5];
+    	char temp8 = cube[2][8];
+    	
+    	cube[2][2] = cube[5][8];
+    	cube[2][5] = cube[5][7];
+    	cube[2][8] = cube[5][6];
+    	
+    	cube[5][8] = cube[0][6];
+    	cube[5][7] = cube[0][3];
+    	cube[5][6] = cube[0][0];
+    	
+    	cube[0][6] = cube[4][0];
+    	cube[0][3] = cube[4][1];
+    	cube[0][0] = cube[4][2];
+    	
+    	cube[4][0] = temp2;
+    	cube[4][1] = temp5;
+    	cube[4][2] = temp8;
     }
     
     //index 4
