@@ -2,6 +2,7 @@ package pack;
 
 import java.util.Random;
 
+
 public class RubiksCube {    
 	
 	private char[][] cube;
@@ -456,4 +457,25 @@ public class RubiksCube {
     	}
     }
     
+    private void setCube(RubiksCube o) {
+    	char[][] original = o.getCube();
+    	for(int i = 0; i < 6; i++) {
+    		for(int j = 0; j < 9; j++) {
+    			cube[i][j] = original[i][j];
+    		}
+    	}
+    	
+    }
+    
+    public RubiksCube copy() {
+    	RubiksCube c = new RubiksCube();
+    	c.setCube(this);
+    	return c;
+    }
+
+    public Boolean equals(RubiksCube c) {
+    	return this.toString().equals(c.toString());
+    }
+
+    public char[][] getCube() {return cube;}
 }
