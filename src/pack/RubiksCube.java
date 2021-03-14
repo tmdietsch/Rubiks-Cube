@@ -386,7 +386,7 @@ public class RubiksCube {
     			cube[1][3] + "|" + cube[1][4] + "|" + cube[1][5] + "|" +
     			cube[2][3] + "|" + cube[2][4] + "|" + cube[2][5] + "|" +
     			cube[3][3] + "|" + cube[3][4] + "|" + cube[3][5] + "|");
-    	System.out.println("|"+ cube[0][0] + "|" + cube[0][1] + "|" + cube[0][2] + "|" + 
+    	System.out.println("|"+ cube[0][6] + "|" + cube[0][7] + "|" + cube[0][8] + "|" + 
     			cube[1][6] + "|" + cube[1][7] + "|" + cube[1][8] + "|" +
     			cube[2][6] + "|" + cube[2][7] + "|" + cube[2][8] + "|" +
     			cube[3][6] + "|" + cube[3][7] + "|" + cube[3][8] + "|");
