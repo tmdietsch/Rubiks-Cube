@@ -5,5 +5,8 @@ public class Main {
         System.out.println("\nTesting\n");
         RubiksCube cube = new RubiksCube();
         cube.printCube();
+        cube.randomize();
+        System.out.println("\n\n");
+        cube.printCube();
     }
 }

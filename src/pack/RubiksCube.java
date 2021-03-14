@@ -1,5 +1,7 @@
 package pack;
 
+import java.util.Random;
+
 public class RubiksCube {    
 	
 	private char[][] cube;
@@ -393,6 +395,65 @@ public class RubiksCube {
     	System.out.println("      |" + cube[5][0] + "|" + cube[5][1] + "|" + cube[5][2] + "|");
     	System.out.println("      |" + cube[5][3] + "|" + cube[5][4] + "|" + cube[5][5] + "|");
     	System.out.println("      |" + cube[5][6] + "|" + cube[5][7] + "|" + cube[5][8] + "|");
+    }
+    
+    public void randomize() {
+    	Random rand = new Random();
+    	int r;
+    	for(int i = 0; i < 10000; i++) {
+    		r = rand.nextInt(12);
+    		switch(r) {
+    		
+    		case 0:
+    			this.move_F();
+    			break;
+    			
+    		case 1:
+    			this.move_Fp();
+    			break;
+    			
+    		case 2:
+    			this.move_B();
+    			break;
+    			
+    		case 3:
+    			this.move_Bp();
+    			break;
+    			
+    		case 4:
+    			this.move_D();
+    			break;
+    			
+    		case 5:
+    			this.move_Dp();
+    			break;
+    			
+    		case 6:
+    			this.move_L();
+    			break;
+    			
+    		case 7:
+    			this.move_Lp();
+    			break;
+    			
+    		case 8:
+    			this.move_R();
+    			break;
+    		
+    		case 9:
+    			this.move_Rp();
+    			break;
+    			
+    		case 10:
+    			this.move_F();
+    			break;
+    			
+    		case 11:
+    			this.move_Fp();
+    			break;
+    			
+    		}
+    	}
     }
     
 }
