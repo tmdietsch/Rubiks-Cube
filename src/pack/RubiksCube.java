@@ -472,6 +472,80 @@ public class RubiksCube {
     	c.setCube(this);
     	return c;
     }
+    
+    /**
+     * Accepts characters: F, B, D, L, R, U
+     * 
+     * @param moveType
+     * @return
+     */
+    public RubiksCube move_copy(char moveType, boolean clockwise) {
+    	
+    	RubiksCube toReturn = this.copy();
+    	
+    	if (clockwise) {
+	    	switch(moveType) {
+			
+			case 'F':
+				toReturn.move_F();
+				break;
+				
+			case 'B':
+				toReturn.move_B();
+				break;
+				
+			case 'D':
+				toReturn.move_D();
+				break;
+				
+			case 'L':
+				toReturn.move_L();
+				break;
+				
+			case 'R':
+				toReturn.move_R();
+				break;
+					
+			case 'U':
+				toReturn.move_U();
+				break;
+			default:
+				throw new IllegalArgumentException();
+			}
+	    }
+    	else {
+	    	switch(moveType) {
+			
+			case 'F':
+				toReturn.move_Fp();
+				break;
+				
+			case 'B':
+				toReturn.move_Bp();
+				break;
+				
+			case 'D':
+				toReturn.move_Dp();
+				break;
+				
+			case 'L':
+				toReturn.move_Lp();
+				break;
+				
+			case 'R':
+				toReturn.move_Rp();
+				break;
+					
+			case 'U':
+				toReturn.move_Up();
+				break;
+			default:
+				throw new IllegalArgumentException();
+			}
+    	}
+    	
+    	return null;
+    }
 
     public Boolean equals(RubiksCube c) {
     	return this.toString().equals(c.toString());
