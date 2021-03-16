@@ -544,7 +544,7 @@ public class RubiksCube {
 			}
     	}
     	
-    	return null;
+    	return toReturn;
     }
 
     public Boolean equals(RubiksCube c) {
