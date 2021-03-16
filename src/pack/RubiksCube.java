@@ -550,6 +550,10 @@ public class RubiksCube {
     public Boolean equals(RubiksCube c) {
     	return this.toString().equals(c.toString());
     }
+    
+    public Boolean equalsString(String c) {
+    	return this.toString().equals(c);
+    }
 
     public char[][] getCube() {return cube;}
 }
