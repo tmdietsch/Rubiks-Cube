@@ -3,21 +3,94 @@ package pack;
 import java.util.Random;
 
 
-public class RubiksCube {    
+public class RubiksCube implements Comparable<RubiksCube> {    
 	
-	private char[][] cube;
+	private final static RubiksCube REFERENCE = new RubiksCube();
+	private Cubelet[][] cube;
 	
     public RubiksCube() {
-    	cube = new char[6][9];
+    	cube = new Cubelet[6][9];
     	
     	//Order: left, front, right, back, top, bottom
     	char[] colors = new char[] {'G', 'R', 'B', 'O', 'W', 'Y'};
     	
     	for (int i = 0; i < cube.length; i++) {
     		for (int j = 0; j < cube[0].length; j++) {
-    			cube[i][j] = colors[i];
+    			cube[i][j] = new Cubelet(colors[i]);
     		}
     	}
+    	
+    	cubeletNeighborInit();
+    }
+    
+    public RubiksCube(String cubeStr) {
+    	cube = new Cubelet[6][9];
+    	
+    	for (int i = 0; i < cube.length; i++) {
+    		for (int j = 0; j < cube[0].length; j++) {
+    			cube[i][j] = new Cubelet(cubeStr.charAt(i * cube.length + j));
+    		}
+    	}
+    }
+    
+    private void cubeletNeighborInit() {
+    	
+    	cube[1][0].addNeighbor(cube[4][6]);
+    	cube[1][0].addNeighbor(cube[0][2]);
+    	
+    	cube[1][2].addNeighbor(cube[2][0]);
+    	cube[1][2].addNeighbor(cube[4][8]);
+    	
+    	cube[1][6].addNeighbor(cube[0][8]);
+    	cube[1][6].addNeighbor(cube[5][0]);
+    	
+    	cube[1][8].addNeighbor(cube[2][6]);
+    	cube[1][8].addNeighbor(cube[5][2]);
+    	
+    	
+    	
+    	cube[3][0].addNeighbor(cube[4][2]);
+    	cube[3][0].addNeighbor(cube[2][2]);
+    	
+    	cube[3][2].addNeighbor(cube[0][0]);
+    	cube[3][2].addNeighbor(cube[4][0]);
+    	
+    	cube[3][6].addNeighbor(cube[2][8]);
+    	cube[3][6].addNeighbor(cube[5][8]);
+    	
+    	cube[3][8].addNeighbor(cube[5][6]);
+    	cube[3][8].addNeighbor(cube[0][8]);
+    	
+    	
+    	
+    	cube[1][1].addNeighbor(cube[4][7]);
+    	
+    	cube[1][3].addNeighbor(cube[0][5]);
+    	
+    	cube[1][5].addNeighbor(cube[2][3]);
+    	
+    	cube[1][7].addNeighbor(cube[5][1]);
+    	
+    	
+    	
+    	cube[3][1].addNeighbor(cube[4][1]);
+    	
+    	cube[3][3].addNeighbor(cube[2][5]);
+    	
+    	cube[3][5].addNeighbor(cube[0][3]);
+    	
+    	cube[3][7].addNeighbor(cube[5][7]);
+    	
+    	
+    	
+    	cube[2][1].addNeighbor(cube[4][5]);
+    	
+    	cube[2][7].addNeighbor(cube[5][5]);
+    	
+    	cube[0][1].addNeighbor(cube[4][3]);
+    	
+    	cube[0][7].addNeighbor(cube[5][3]);
+    	
     }
 
     //Moves for a Rubiks Cube
@@ -26,9 +99,9 @@ public class RubiksCube {
     public void move_L() {
     	rotateFace(0, true);
     	
-    	char temp0 = cube[1][0];
-    	char temp3 = cube[1][3];
-    	char temp6 = cube[1][6];
+    	Cubelet temp0 = cube[1][0];
+    	Cubelet temp3 = cube[1][3];
+    	Cubelet temp6 = cube[1][6];
     	
     	cube[1][0] = cube[4][0];
     	cube[1][3] = cube[4][3];
@@ -52,9 +125,9 @@ public class RubiksCube {
     public void move_F() {
     	rotateFace(1, true);
     	
-    	char temp8 = cube[0][8];
-    	char temp5 = cube[0][5];
-    	char temp2 = cube[0][2];
+    	Cubelet temp8 = cube[0][8];
+    	Cubelet temp5 = cube[0][5];
+    	Cubelet temp2 = cube[0][2];
     	
     	cube[0][8] = cube[5][2];
     	cube[0][5] = cube[5][1];
@@ -78,9 +151,9 @@ public class RubiksCube {
     public void move_R() {
     	rotateFace(2, true);
     	
-    	char temp8 = cube[5][8];
-    	char temp5 = cube[5][5];
-    	char temp2 = cube[5][2];
+    	Cubelet temp8 = cube[5][8];
+    	Cubelet temp5 = cube[5][5];
+    	Cubelet temp2 = cube[5][2];
     	
     	cube[5][8] = cube[3][0];
     	cube[5][5] = cube[3][3];
@@ -103,9 +176,9 @@ public class RubiksCube {
     public void move_B() {
     	rotateFace(3, true);
     	
-    	char temp2 = cube[2][2];
-    	char temp5 = cube[2][5];
-    	char temp8 = cube[2][8];
+    	Cubelet temp2 = cube[2][2];
+    	Cubelet temp5 = cube[2][5];
+    	Cubelet temp8 = cube[2][8];
     	
     	cube[2][2] = cube[5][8];
     	cube[2][5] = cube[5][7];
@@ -128,9 +201,9 @@ public class RubiksCube {
     public void move_U() {
     	rotateFace(4, false);
     	
-    	char temp2 = cube[2][2];
-    	char temp1 = cube[2][1];
-    	char temp0 = cube[2][0];
+    	Cubelet temp2 = cube[2][2];
+    	Cubelet temp1 = cube[2][1];
+    	Cubelet temp0 = cube[2][0];
     	
     	cube[2][2] = cube[3][2];
     	cube[2][1] = cube[3][1];
@@ -153,9 +226,9 @@ public class RubiksCube {
     public void move_D() {
     	rotateFace(5, true);
     	
-    	char temp2 = cube[0][6];
-    	char temp1 = cube[0][7];
-    	char temp0 = cube[0][8];
+    	Cubelet temp2 = cube[0][6];
+    	Cubelet temp1 = cube[0][7];
+    	Cubelet temp0 = cube[0][8];
     	
     	cube[0][6] = cube[3][6];
     	cube[0][7] = cube[3][7];
@@ -180,9 +253,9 @@ public class RubiksCube {
     public void move_Lp() {
     	rotateFace(0, false);
     	
-    	char temp0 = cube[4][0];
-    	char temp3 = cube[4][3];
-    	char temp6 = cube[4][6];
+    	Cubelet temp0 = cube[4][0];
+    	Cubelet temp3 = cube[4][3];
+    	Cubelet temp6 = cube[4][6];
     	
     	cube[4][0] = cube[1][0];
     	cube[4][3] = cube[1][3];
@@ -206,9 +279,9 @@ public class RubiksCube {
     public void move_Fp() {
     	rotateFace(1, false);
     	
-    	char temp6 = cube[4][6];
-    	char temp7 = cube[4][7];
-    	char temp8 = cube[4][8];
+    	Cubelet temp6 = cube[4][6];
+    	Cubelet temp7 = cube[4][7];
+    	Cubelet temp8 = cube[4][8];
     	
     	cube[4][6] = cube[2][0];
     	cube[4][7] = cube[2][3];
@@ -231,9 +304,9 @@ public class RubiksCube {
     public void move_Rp() {
     	rotateFace(2, false);
     	
-    	char temp1 = cube[4][8];
-    	char temp2 = cube[4][5];
-    	char temp3 = cube[4][2];
+    	Cubelet temp1 = cube[4][8];
+    	Cubelet temp2 = cube[4][5];
+    	Cubelet temp3 = cube[4][2];
     	
     	cube[4][8] = cube[3][0];
     	cube[4][5] = cube[3][3];
@@ -256,9 +329,9 @@ public class RubiksCube {
     public void move_Bp() {
     	rotateFace(3, false);
     	
-    	char temp1 = cube[4][0];
-    	char temp2 = cube[4][1];
-    	char temp3 = cube[4][2];
+    	Cubelet temp1 = cube[4][0];
+    	Cubelet temp2 = cube[4][1];
+    	Cubelet temp3 = cube[4][2];
     	
     	cube[4][0] = cube[0][6];
     	cube[4][1] = cube[0][3];
@@ -281,9 +354,9 @@ public class RubiksCube {
     public void move_Up() {
     	rotateFace(4, false);
     	
-    	char temp1 = cube[3][0];
-    	char temp2 = cube[3][1];
-    	char temp3 = cube[3][2];
+    	Cubelet temp1 = cube[3][0];
+    	Cubelet temp2 = cube[3][1];
+    	Cubelet temp3 = cube[3][2];
     	
     	cube[3][0] = cube[2][0];
     	cube[3][1] = cube[2][1];
@@ -307,9 +380,9 @@ public class RubiksCube {
     public void move_Dp() {
     	rotateFace(5, false);
     	
-    	char temp1 = cube[1][6];
-    	char temp2 = cube[1][7];
-    	char temp3 = cube[1][8];
+    	Cubelet temp1 = cube[1][6];
+    	Cubelet temp2 = cube[1][7];
+    	Cubelet temp3 = cube[1][8];
     	
     	cube[1][6] = cube[2][6];
     	cube[1][7] = cube[2][7];
@@ -347,8 +420,8 @@ public class RubiksCube {
     //1 -> 5 -> 7 -> 4
     private void rotateFace(int side, boolean clockwise) {
     	
-    	char temp1 = cube[side][0];
-    	char temp2 = cube[side][1];
+    	Cubelet temp1 = cube[side][0];
+    	Cubelet temp2 = cube[side][1];
     	
     	if (clockwise) {
     		
@@ -376,32 +449,82 @@ public class RubiksCube {
     	}
     	
     }
+    
+    public void rotateCube(int direction) {
+    	
+    	int[] sides;
+    	Cubelet[] holder;
+    	
+    	switch (direction) {
+    	
+    	case 0:
+    		sides = new int[] {1, 4, 3, 5};
+    		rotateFace(0, true);
+    		rotateFace(2, false);
+    		break;
+    	case 1:
+    		sides = new int[] {0, 4, 2, 5};
+    		rotateFace(1, false);
+    		rotateFace(3, true);
+    		break;
+    	case 2:
+    		sides = new int[] {0, 1, 2, 3};
+    		rotateFace(4, true);
+    		rotateFace(5, false);
+    		break;
+    	case 3:
+    		sides = new int[] {5, 3, 4, 1};
+    		rotateFace(0, false);
+    		rotateFace(2, true);
+    		break;
+    	case 4:
+    		sides = new int[] {5, 2, 4, 0};
+    		rotateFace(1, true);
+    		rotateFace(3, false);
+    		break;
+    	case 5:
+    		sides = new int[] {1, 4, 3, 5};
+    		rotateFace(0, true);
+    		rotateFace(2, false);
+    		break;
+    	default:
+    		return;
+    	}
+    	
+    	holder = cube[sides[0]];
+    	
+    	cube[sides[0]] = cube[sides[1]];
+    	cube[sides[1]] = cube[sides[2]];
+    	cube[sides[2]] = cube[sides[3]];
+    	cube[sides[3]] = holder;
+    	
+    }
 
     public void printCube() {
-    	System.out.println("      |" + cube[4][0] + "|" + cube[4][1] + "|" + cube[4][2] + "|");
-    	System.out.println("      |" + cube[4][3] + "|" + cube[4][4] + "|" + cube[4][5] + "|");
-    	System.out.println("      |" + cube[4][6] + "|" + cube[4][7] + "|" + cube[4][8] + "|");
-    	System.out.println("|"+ cube[0][0] + "|" + cube[0][1] + "|" + cube[0][2] + "|" + 
-    			cube[1][0] + "|" + cube[1][1] + "|" + cube[1][2] + "|" +
-    			cube[2][0] + "|" + cube[2][1] + "|" + cube[2][2] + "|" +
-    			cube[3][0] + "|" + cube[3][1] + "|" + cube[3][2] + "|");
-    	System.out.println("|"+ cube[0][3] + "|" + cube[0][4] + "|" + cube[0][5] + "|" + 
-    			cube[1][3] + "|" + cube[1][4] + "|" + cube[1][5] + "|" +
-    			cube[2][3] + "|" + cube[2][4] + "|" + cube[2][5] + "|" +
-    			cube[3][3] + "|" + cube[3][4] + "|" + cube[3][5] + "|");
-    	System.out.println("|"+ cube[0][6] + "|" + cube[0][7] + "|" + cube[0][8] + "|" + 
-    			cube[1][6] + "|" + cube[1][7] + "|" + cube[1][8] + "|" +
-    			cube[2][6] + "|" + cube[2][7] + "|" + cube[2][8] + "|" +
-    			cube[3][6] + "|" + cube[3][7] + "|" + cube[3][8] + "|");
-    	System.out.println("      |" + cube[5][0] + "|" + cube[5][1] + "|" + cube[5][2] + "|");
-    	System.out.println("      |" + cube[5][3] + "|" + cube[5][4] + "|" + cube[5][5] + "|");
-    	System.out.println("      |" + cube[5][6] + "|" + cube[5][7] + "|" + cube[5][8] + "|");
+    	System.out.println("      |" + cube[4][0].color + "|" + cube[4][1].color + "|" + cube[4][2].color + "|");
+    	System.out.println("      |" + cube[4][3].color + "|" + cube[4][4].color + "|" + cube[4][5].color + "|");
+    	System.out.println("      |" + cube[4][6].color + "|" + cube[4][7].color + "|" + cube[4][8].color + "|");
+    	System.out.println("|"+ cube[0][0].color + "|" + cube[0][1].color + "|" + cube[0][2].color + "|" + 
+    			cube[1][0].color + "|" + cube[1][1].color + "|" + cube[1][2].color + "|" +
+    			cube[2][0].color + "|" + cube[2][1].color + "|" + cube[2][2].color + "|" +
+    			cube[3][0].color + "|" + cube[3][1].color + "|" + cube[3][2].color + "|");
+    	System.out.println("|"+ cube[0][3].color + "|" + cube[0][4].color + "|" + cube[0][5].color + "|" + 
+    			cube[1][3].color + "|" + cube[1][4].color + "|" + cube[1][5].color + "|" +
+    			cube[2][3].color + "|" + cube[2][4].color + "|" + cube[2][5].color + "|" +
+    			cube[3][3].color + "|" + cube[3][4].color + "|" + cube[3][5].color + "|");
+    	System.out.println("|"+ cube[0][6].color + "|" + cube[0][7].color + "|" + cube[0][8].color + "|" + 
+    			cube[1][6].color + "|" + cube[1][7].color + "|" + cube[1][8].color + "|" +
+    			cube[2][6].color + "|" + cube[2][7].color + "|" + cube[2][8].color + "|" +
+    			cube[3][6].color + "|" + cube[3][7].color + "|" + cube[3][8].color + "|");
+    	System.out.println("      |" + cube[5][0].color + "|" + cube[5][1].color + "|" + cube[5][2].color + "|");
+    	System.out.println("      |" + cube[5][3].color + "|" + cube[5][4].color + "|" + cube[5][5].color + "|");
+    	System.out.println("      |" + cube[5][6].color + "|" + cube[5][7].color + "|" + cube[5][8].color + "|");
     }
     
     public void randomize() {
     	Random rand = new Random();
     	int r;
-    	for(int i = 0; i < 10000; i++) {
+    	for(int i = 0; i < 10; i++) {
     		r = rand.nextInt(12);
     		switch(r) {
     		
@@ -446,19 +569,20 @@ public class RubiksCube {
     			break;
     			
     		case 10:
-    			this.move_F();
+    			this.move_U();
     			break;
     			
     		case 11:
-    			this.move_Fp();
+    			this.move_Up();
     			break;
-    			
     		}
     	}
+    	
+//    	setColorDistances();
     }
     
     private void setCube(RubiksCube o) {
-    	char[][] original = o.getCube();
+    	Cubelet[][] original = o.getCube();
     	for(int i = 0; i < 6; i++) {
     		for(int j = 0; j < 9; j++) {
     			cube[i][j] = original[i][j];
@@ -479,11 +603,11 @@ public class RubiksCube {
      * @param moveType
      * @return
      */
-    public RubiksCube move_copy(char moveType, boolean clockwise) {
+    public RubiksCube move_copy(char moveType, int clockwise) {
     	
     	RubiksCube toReturn = this.copy();
     	
-    	if (clockwise) {
+    	if (clockwise == 0) {
 	    	switch(moveType) {
 			
 			case 'F':
@@ -513,7 +637,7 @@ public class RubiksCube {
 				throw new IllegalArgumentException();
 			}
 	    }
-    	else {
+    	else if (clockwise == 1) {
 	    	switch(moveType) {
 			
 			case 'F':
@@ -543,6 +667,42 @@ public class RubiksCube {
 				throw new IllegalArgumentException();
 			}
     	}
+    	else {
+	    	switch(moveType) {
+			
+			case 'F':
+				toReturn.move_F();
+				toReturn.move_F();
+				break;
+				
+			case 'B':
+				toReturn.move_B();
+				toReturn.move_B();
+				break;
+				
+			case 'D':
+				toReturn.move_D();
+				toReturn.move_D();
+				break;
+				
+			case 'L':
+				toReturn.move_L();
+				toReturn.move_L();
+				break;
+				
+			case 'R':
+				toReturn.move_R();
+				toReturn.move_R();
+				break;
+					
+			case 'U':
+				toReturn.move_U();
+				toReturn.move_U();
+				break;
+			default:
+				throw new IllegalArgumentException();
+			}
+    	}
     	
     	return toReturn;
     }
@@ -555,5 +715,105 @@ public class RubiksCube {
     	return this.toString().equals(c);
     }
 
-    public char[][] getCube() {return cube;}
+    public Cubelet[][] getCube() {return cube;}
+    
+    public char getColorAt(int index) {
+    	return cube[index / cube[0].length] [index % cube[0].length].color;
+    }
+    
+    public char getColorAt(int side, int num) {
+    	return cube[side][num].color;
+    }
+    
+    @Override
+    public int compareTo(RubiksCube rCube) {
+		
+    	int rCubeResult = 0;
+    	int thisResult = 0;
+    	
+    	for (int i = 0; i < cube.length; i++) {
+    		Cubelet temp = cube[i][4];	//getting center square
+    		
+    		for (int j = 0; j < cube[i].length; j++) {
+    			if (cube[i][j] == temp && cube[i][j].equals(REFERENCE.cube[i][j])) {
+    				if (j % 2 == 0)
+    					thisResult += 14;
+    				else
+    					thisResult += 8;
+    			}
+    		}
+    		
+    		if (cube[i][0] == cube[i][1])
+    			thisResult++;
+    		
+    		if (cube[i][0] == cube[i][3])
+    			thisResult++;
+    		
+    		if (cube[i][6] == cube[i][7])
+    			thisResult++;
+    		
+    		if (cube[i][2] == cube[i][5])
+    			thisResult++;
+    		
+    		
+    		if (cube[i][1] == cube[i][2])
+    			thisResult++;
+    		
+    		if (cube[i][0] == cube[i][6])
+    			thisResult++;
+    		
+    		if (cube[i][6] == cube[i][8])
+    			thisResult++;
+    		
+    		if (cube[i][2] == cube[i][8])
+    			thisResult++;
+    		
+    	}
+    	
+    	for (int i = 0; i < rCube.cube.length; i++) {
+    		Cubelet temp = cube[i][4];	//getting center square
+    		
+    		for (int j = 0; j < rCube.cube[i].length; j++) {
+    			if (rCube.cube[i][j] == temp && rCube.cube[i][j].equals(REFERENCE.cube[i][j])) {
+    				if (j % 2 == 0)
+    					rCubeResult += 10;
+    				else
+    					rCubeResult += 6;
+    			}
+    		}
+    		
+    		if (rCube.cube[i][0] == rCube.cube[i][1])
+    			rCubeResult++;
+    		
+    		if (rCube.cube[i][0] == rCube.cube[i][3])
+    			rCubeResult++;
+    		
+    		if (rCube.cube[i][6] == rCube.cube[i][7])
+    			rCubeResult++;
+    		
+    		if (rCube.cube[i][2] == rCube.cube[i][5])
+    			rCubeResult++;
+    		
+    		
+    		if (rCube.cube[i][1] == rCube.cube[i][2])
+    			rCubeResult++;
+    		
+    		if (rCube.cube[i][0] == rCube.cube[i][6])
+    			rCubeResult++;
+    		
+    		if (rCube.cube[i][6] == rCube.cube[i][8])
+    			rCubeResult++;
+    		
+    		if (rCube.cube[i][2] == rCube.cube[i][8])
+    			rCubeResult++;
+    		
+    	}
+    	
+    	thisResult = 300 - thisResult;
+    	rCubeResult = 300 - rCubeResult;
+    	
+    	return thisResult - rCubeResult;
+    	
+    }
+    
 }
