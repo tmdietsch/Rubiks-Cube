@@ -28,7 +28,7 @@ public class RubiksCube implements Comparable<RubiksCube> {
     	
     	for (int i = 0; i < cube.length; i++) {
     		for (int j = 0; j < cube[0].length; j++) {
-    			cube[i][j] = new Cubelet(cubeStr.charAt(i * cube.length + j));
+    			cube[i][j] = new Cubelet(cubeStr.charAt(i * 9 + j));
     		}
     	}
     }
@@ -199,7 +199,7 @@ public class RubiksCube implements Comparable<RubiksCube> {
     
     //index 4
     public void move_U() {
-    	rotateFace(4, false);
+    	rotateFace(4, true);
     	
     	Cubelet temp2 = cube[2][2];
     	Cubelet temp1 = cube[2][1];
@@ -408,7 +408,7 @@ public class RubiksCube implements Comparable<RubiksCube> {
     	
     	for (int i = 0; i < cube.length; i++) {
     		for (int j = 0; j < cube[0].length; j++) {
-    			toReturn = toReturn + cube[i][j];
+    			toReturn = toReturn + cube[i][j].color;
     		}
     	}
     	
