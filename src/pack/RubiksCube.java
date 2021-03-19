@@ -519,6 +519,7 @@ public class RubiksCube {
     	System.out.println("      |" + cube[5][0].color + "|" + cube[5][1].color + "|" + cube[5][2].color + "|");
     	System.out.println("      |" + cube[5][3].color + "|" + cube[5][4].color + "|" + cube[5][5].color + "|");
     	System.out.println("      |" + cube[5][6].color + "|" + cube[5][7].color + "|" + cube[5][8].color + "|");
+    	System.out.println("\n\n");
     }
     
     public void randomize(int n) {

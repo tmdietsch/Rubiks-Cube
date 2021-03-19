@@ -23,7 +23,8 @@ public class BreadthFirstSearch {
 		ArrayList<String> searched = new ArrayList<>();
 		Queue<Node> search = new LinkedList<>();
 		Node s = new Node(start.copy());
-		Node currLocation = new Node(null);
+		Node currLocation;
+		int count = 0;
 		
 		boolean found = false;
 		search.add(s);
@@ -37,30 +38,31 @@ public class BreadthFirstSearch {
 			}
 			else {
 				RubiksCube temp;
+				RubiksCube currCube = currLocation.getSelf();
 				ArrayList<RubiksCube> children = new ArrayList<>();
-				temp = currLocation.getSelf().move_copy('U', 0);
+				temp = currCube.move_copy('U', 0);
 				children.add(temp);
-				temp = currLocation.getSelf().move_copy('U', 1);
+				temp = currCube.move_copy('U', 1);
 				children.add(temp);
-				temp = currLocation.getSelf().move_copy('D', 0);
+				temp = currCube.move_copy('D', 0);
 				children.add(temp);
-				temp = currLocation.getSelf().move_copy('D', 1);
+				temp = currCube.move_copy('D', 1);
 				children.add(temp);
-				temp = currLocation.getSelf().move_copy('R', 0);
+				temp = currCube.move_copy('R', 0);
 				children.add(temp);
-				temp = currLocation.getSelf().move_copy('R', 1);
+				temp = currCube.move_copy('R', 1);
 				children.add(temp);
-				temp = currLocation.getSelf().move_copy('L', 0);
+				temp = currCube.move_copy('L', 0);
 				children.add(temp);
-				temp = currLocation.getSelf().move_copy('L', 1);
+				temp = currCube.move_copy('L', 1);
 				children.add(temp);
-				temp = currLocation.getSelf().move_copy('F', 0);
+				temp = currCube.move_copy('F', 0);
 				children.add(temp);
-				temp = currLocation.getSelf().move_copy('F', 1);
+				temp = currCube.move_copy('F', 1);
 				children.add(temp);
-				temp = currLocation.getSelf().move_copy('B', 0);
+				temp = currCube.move_copy('B', 0);
 				children.add(temp);
-				temp = currLocation.getSelf().move_copy('B', 1);
+				temp = currCube.move_copy('B', 1);
 				children.add(temp);
 				for(int i = 0; i < children.size(); i++) {
 					String tempName = children.get(i).toString();
@@ -73,6 +75,10 @@ public class BreadthFirstSearch {
 				}
 			}
 			searched.add(currLocation.getSelf().toString());
+			count++;
+			if(count%1000 == 0) {
+				System.out.println("Nodes searched " + count);
+			}
 		}
 		
 	}
