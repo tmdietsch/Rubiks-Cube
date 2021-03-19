@@ -1,6 +1,7 @@
 package pack;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -20,7 +21,7 @@ public class BreadthFirstSearch {
 	}
 	
 	public void BFS(RubiksCube start, String goal, ArrayList<Node> p) {
-		ArrayList<String> searched = new ArrayList<>();
+		HashSet<String> searched = new HashSet<>();
 		Queue<Node> search = new LinkedList<>();
 		Node s = new Node(start.copy());
 		Node currLocation;
@@ -79,6 +80,7 @@ public class BreadthFirstSearch {
 			if(count%1000 == 0) {
 				System.out.println("Nodes searched " + count);
 			}
+			
 		}
 		
 	}
