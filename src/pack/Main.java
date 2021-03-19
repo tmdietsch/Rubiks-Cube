@@ -6,22 +6,13 @@ public class Main {
     	RubiksCube reference = RubiksCube.REFERENCE;
     	RubiksCube cube = new RubiksCube();
     	
-    	cube.move_B();
-    	cube.move_D();
-    	cube.move_F();
-    	cube.move_Bp();
-    	cube.move_Lp();
-    	cube.move_Fp();
-    	cube.move_Bp();
-    	cube.move_Up();
-//    	cube.move_Up();
-//    	cube.move_L();
-//    	
+    	cube.randomize(13);
+    	
     	cube.printCube();
     	
     	AStarSearch aStar = new AStarSearch(cube, 2);
     	
-    	aStar.startSearchRecursive();
+    	aStar.startSearch();
     	
     	System.out.println("Done");
     	

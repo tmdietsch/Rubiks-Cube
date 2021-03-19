@@ -3,7 +3,7 @@ package pack;
 import java.util.Random;
 
 
-public class RubiksCube implements Comparable<RubiksCube> {    
+public class RubiksCube {    
 	
 	public final static RubiksCube REFERENCE = new RubiksCube();
 	private Cubelet[][] cube;
@@ -725,11 +725,9 @@ public class RubiksCube implements Comparable<RubiksCube> {
     	return cube[side][num].color;
     }
     
-    @Override
-    public int compareTo(RubiksCube rCube) {
+    public int heuristic() {
 		
     	int thisResult = 0;
-    	int rCubeResult = 0;
     	
     	for (int i = 0; i < cube.length; i++) {
     		Cubelet temp = cube[i][4];	//getting center square
@@ -745,21 +743,36 @@ public class RubiksCube implements Comparable<RubiksCube> {
     		
     	}
     	
-    	for (int i = 0; i < rCube.cube.length; i++) {
-    		Cubelet temp = cube[i][4];	//getting center square
-    		
-    		for (int j = 0; j < rCube.cube[i].length; j++) {
-    			if (! (rCube.cube[i][j].color == temp.color && rCube.cube[i][j].color == REFERENCE.cube[i][j].color)) {
-    				if (j % 2 == 0)
-    					rCubeResult += 1;
-    				else
-    					rCubeResult += 1;
-    			}
-    		}
-    		
-    	}
+//    	for (int i = 0; i < rCube.cube.length; i++) {
+//    		Cubelet temp = cube[i][4];	//getting center square
+//    		
+//    		for (int j = 0; j < rCube.cube[i].length; j++) {
+//    			if (! (rCube.cube[i][j].color == temp.color && rCube.cube[i][j].color == REFERENCE.cube[i][j].color)) {
+//    				if (j % 2 == 0)
+//    					rCubeResult += 1;
+//    				else
+//    					rCubeResult += 1;
+//    			}
+//    		}
+//    		
+//    	}
     	
-    	return Integer.compare(thisResult, rCubeResult);
+//    	for (int i = 0; i < cube.length; i++) {
+//		Cubelet temp = cube[i][4];	//getting center square
+//		
+//			for (int j = 0; j < cube[i].length; j++) {
+//
+//				if (temp.color != cube[i][j].color) {
+//					
+//					
+//					
+//				}
+//				
+//			}
+//			
+//		}
+    	
+    	return thisResult;
     	
     }
     
