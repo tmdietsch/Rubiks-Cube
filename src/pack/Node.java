@@ -35,7 +35,7 @@ public class Node implements Comparable<Node> {
     	self = s;				//setting cube
     	name = s.toString();	//initializing name
     	
-    	this.cost = 1 + parent.cost;		//calculating cost
+    	this.cost = 2 + parent.cost;		//calculating cost
     	this.straightCost = s.heuristic();	//calculating heuristic
     }
     
