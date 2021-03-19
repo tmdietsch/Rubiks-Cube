@@ -10,7 +10,7 @@ public class Main {
     	
     	cube.printCube();
     	
-    	AStarSearch aStar = new AStarSearch(cube, 2);
+    	AStarSearch aStar = new AStarSearch(cube);
     	
     	aStar.startSearch();
     	
