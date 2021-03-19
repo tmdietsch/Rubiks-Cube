@@ -69,7 +69,6 @@ public class BreadthFirstSearch {
 					String tempName = children.get(i).toString();
 					if(!searched.contains(tempName)) {
 						Node tempN = new Node(children.get(i));
-//						currLocation.addChild(tempN);
 						search.add(tempN);
 						searched.add(tempName);
 					}
@@ -77,7 +76,7 @@ public class BreadthFirstSearch {
 			}
 			searched.add(currLocation.getSelf().toString());
 			count++;
-			if(count%1000 == 0) {
+			if(count%10000 == 0) {
 				System.out.println("Nodes searched " + count);
 			}
 			
