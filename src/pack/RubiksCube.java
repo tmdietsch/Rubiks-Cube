@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class RubiksCube implements Comparable<RubiksCube> {    
 	
-	private final static RubiksCube REFERENCE = new RubiksCube();
+	public final static RubiksCube REFERENCE = new RubiksCube();
 	private Cubelet[][] cube;
 	
     public RubiksCube() {
@@ -728,45 +728,20 @@ public class RubiksCube implements Comparable<RubiksCube> {
     @Override
     public int compareTo(RubiksCube rCube) {
 		
-    	int rCubeResult = 0;
     	int thisResult = 0;
+    	int rCubeResult = 0;
     	
     	for (int i = 0; i < cube.length; i++) {
     		Cubelet temp = cube[i][4];	//getting center square
     		
     		for (int j = 0; j < cube[i].length; j++) {
-    			if (cube[i][j] == temp && cube[i][j].equals(REFERENCE.cube[i][j])) {
+    			if (! (cube[i][j].color == temp.color && cube[i][j].color == REFERENCE.cube[i][j].color)) {
     				if (j % 2 == 0)
-    					thisResult += 14;
+    					thisResult += 1;
     				else
-    					thisResult += 8;
+    					thisResult += 1;
     			}
     		}
-    		
-    		if (cube[i][0] == cube[i][1])
-    			thisResult++;
-    		
-    		if (cube[i][0] == cube[i][3])
-    			thisResult++;
-    		
-    		if (cube[i][6] == cube[i][7])
-    			thisResult++;
-    		
-    		if (cube[i][2] == cube[i][5])
-    			thisResult++;
-    		
-    		
-    		if (cube[i][1] == cube[i][2])
-    			thisResult++;
-    		
-    		if (cube[i][0] == cube[i][6])
-    			thisResult++;
-    		
-    		if (cube[i][6] == cube[i][8])
-    			thisResult++;
-    		
-    		if (cube[i][2] == cube[i][8])
-    			thisResult++;
     		
     	}
     	
@@ -774,45 +749,17 @@ public class RubiksCube implements Comparable<RubiksCube> {
     		Cubelet temp = cube[i][4];	//getting center square
     		
     		for (int j = 0; j < rCube.cube[i].length; j++) {
-    			if (rCube.cube[i][j] == temp && rCube.cube[i][j].equals(REFERENCE.cube[i][j])) {
+    			if (! (rCube.cube[i][j].color == temp.color && rCube.cube[i][j].color == REFERENCE.cube[i][j].color)) {
     				if (j % 2 == 0)
-    					rCubeResult += 10;
+    					rCubeResult += 1;
     				else
-    					rCubeResult += 6;
+    					rCubeResult += 1;
     			}
     		}
     		
-    		if (rCube.cube[i][0] == rCube.cube[i][1])
-    			rCubeResult++;
-    		
-    		if (rCube.cube[i][0] == rCube.cube[i][3])
-    			rCubeResult++;
-    		
-    		if (rCube.cube[i][6] == rCube.cube[i][7])
-    			rCubeResult++;
-    		
-    		if (rCube.cube[i][2] == rCube.cube[i][5])
-    			rCubeResult++;
-    		
-    		
-    		if (rCube.cube[i][1] == rCube.cube[i][2])
-    			rCubeResult++;
-    		
-    		if (rCube.cube[i][0] == rCube.cube[i][6])
-    			rCubeResult++;
-    		
-    		if (rCube.cube[i][6] == rCube.cube[i][8])
-    			rCubeResult++;
-    		
-    		if (rCube.cube[i][2] == rCube.cube[i][8])
-    			rCubeResult++;
-    		
     	}
     	
-    	thisResult = 300 - thisResult;
-    	rCubeResult = 300 - rCubeResult;
-    	
-    	return thisResult - rCubeResult;
+    	return Integer.compare(thisResult, rCubeResult);
     	
     }
     
