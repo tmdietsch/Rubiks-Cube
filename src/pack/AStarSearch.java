@@ -19,13 +19,6 @@ public class AStarSearch {
 		totalCost = -1;
 	}
 	
-	public AStarSearch(RubiksCube start, int iterativeDepth) {
-		startingCube = new Node(start);
-		nodeKeys = new PriorityQueue<>();
-		searchedNodes = new HashSet<>();
-		totalCost = -1;
-	}
-	
 	public String startSearch() {
 		
 		Node currentCube = startingCube;
@@ -56,7 +49,7 @@ public class AStarSearch {
 	private void addChildren(Node parent) {
 		
 		
-		int numMoves = 3;
+		int numMoves = 2;
 		
 		searchedNodes.add(parent.toString());
 		

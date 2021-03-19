@@ -667,42 +667,42 @@ public class RubiksCube {
 				throw new IllegalArgumentException();
 			}
     	}
-    	else {
-	    	switch(moveType) {
-			
-			case 'F':
-				toReturn.move_F();
-				toReturn.move_F();
-				break;
-				
-			case 'B':
-				toReturn.move_B();
-				toReturn.move_B();
-				break;
-				
-			case 'D':
-				toReturn.move_D();
-				toReturn.move_D();
-				break;
-				
-			case 'L':
-				toReturn.move_L();
-				toReturn.move_L();
-				break;
-				
-			case 'R':
-				toReturn.move_R();
-				toReturn.move_R();
-				break;
-					
-			case 'U':
-				toReturn.move_U();
-				toReturn.move_U();
-				break;
-			default:
-				throw new IllegalArgumentException();
-			}
-    	}
+//    	else {
+//	    	switch(moveType) {
+//			
+//			case 'F':
+//				toReturn.move_F();
+//				toReturn.move_F();
+//				break;
+//				
+//			case 'B':
+//				toReturn.move_B();
+//				toReturn.move_B();
+//				break;
+//				
+//			case 'D':
+//				toReturn.move_D();
+//				toReturn.move_D();
+//				break;
+//				
+//			case 'L':
+//				toReturn.move_L();
+//				toReturn.move_L();
+//				break;
+//				
+//			case 'R':
+//				toReturn.move_R();
+//				toReturn.move_R();
+//				break;
+//					
+//			case 'U':
+//				toReturn.move_U();
+//				toReturn.move_U();
+//				break;
+//			default:
+//				throw new IllegalArgumentException();
+//			}
+//    	}
     	
     	return toReturn;
     }
@@ -728,6 +728,7 @@ public class RubiksCube {
     public int heuristic() {
 		
     	int thisResult = 0;
+    	int max = 0;
     	
     	for (int i = 0; i < cube.length; i++) {
     		Cubelet temp = cube[i][4];	//getting center square
@@ -738,39 +739,13 @@ public class RubiksCube {
     					thisResult += 1;
     				else
     					thisResult += 1;
+    				
+//    				if (thisResult > max)
+//    					max = thisResult;
     			}
     		}
     		
     	}
-    	
-//    	for (int i = 0; i < rCube.cube.length; i++) {
-//    		Cubelet temp = cube[i][4];	//getting center square
-//    		
-//    		for (int j = 0; j < rCube.cube[i].length; j++) {
-//    			if (! (rCube.cube[i][j].color == temp.color && rCube.cube[i][j].color == REFERENCE.cube[i][j].color)) {
-//    				if (j % 2 == 0)
-//    					rCubeResult += 1;
-//    				else
-//    					rCubeResult += 1;
-//    			}
-//    		}
-//    		
-//    	}
-    	
-//    	for (int i = 0; i < cube.length; i++) {
-//		Cubelet temp = cube[i][4];	//getting center square
-//		
-//			for (int j = 0; j < cube[i].length; j++) {
-//
-//				if (temp.color != cube[i][j].color) {
-//					
-//					
-//					
-//				}
-//				
-//			}
-//			
-//		}
     	
     	return thisResult;
     	
