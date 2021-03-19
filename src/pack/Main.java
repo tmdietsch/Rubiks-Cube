@@ -73,24 +73,34 @@ public class Main {
     	cube.randomize(6);
     	cube.printCube();
     	
-    	System.out.println("Breadth First Search");
-    	bfs = new BreadthFirstSearch(cube, reference);
-    	bfs.Start();
+//    	System.out.println("Breadth First Search");
+//    	bfs = new BreadthFirstSearch(cube, reference);
+//    	bfs.Start();
     	
     	System.out.println("A* Search");
     	aStar = new AStarSearch(cube);
     	aStar.startSearch();
     	
+//    	RubiksCube aCube = new RubiksCube();
+//    	
+//    	aCube.move_B();
+//    	aCube.move_D();
+//    	aCube.move_L();
+//    	aCube.move_Bp();
+//    	aCube.move_F();
+//    	aCube.move_U();
+//    	aCube.move_Dp();
+    	
     	//Run both algorithms after making 7 moves on the cube
     	//Runtime for this amount of moves is often unreasonable
     	cube = new RubiksCube();
     	System.out.println("Random move selected 7 times");
-    	cube.randomize(7);
+    	cube.randomize(10);
     	cube.printCube();
     	
-    	System.out.println("Breadth First Search");
-    	bfs = new BreadthFirstSearch(cube, reference);
-    	bfs.Start();
+//    	System.out.println("Breadth First Search");
+//    	bfs = new BreadthFirstSearch(cube, reference);
+//    	bfs.Start();
     	
     	System.out.println("A* Search");
     	aStar = new AStarSearch(cube);

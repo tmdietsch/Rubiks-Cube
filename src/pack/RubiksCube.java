@@ -620,15 +620,15 @@ public class RubiksCube {
     		for (int j = 0; j < cube[i].length; j++) {
     			if (! (cube[i][j] == temp && cube[i][j] == REFERENCE.cube[i][j])) {
     				if (j % 2 == 0)
-    					thisResult += 1;
+    					thisResult += 2;
     				else
-    					thisResult += 1;
+    					thisResult += 2;
     			}
     		}
     		
     	}
     	
-    	return thisResult;
+    	return thisResult / 8;
     	
     }
     

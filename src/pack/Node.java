@@ -7,7 +7,7 @@ public class Node implements Comparable<Node> {
     Node parent;		//parent node
     RubiksCube self;	//cube represented by node
     
-    private int moveCost = 2;
+    private int moveCost = 1;
     
     int cost;			//cost so far
     int straightCost;	//cost if we move each color with no obstructions
