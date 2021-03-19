@@ -388,6 +388,11 @@ public class RubiksCube {
     	
     }
 
+    /**
+     * 
+     * prints out the cube in a flattened out format
+     * 
+     * */
     public void printCube() {
     	System.out.println("      |" + cube[4][0] + "|" + cube[4][1] + "|" + cube[4][2] + "|");
     	System.out.println("      |" + cube[4][3] + "|" + cube[4][4] + "|" + cube[4][5] + "|");
@@ -407,9 +412,12 @@ public class RubiksCube {
     	System.out.println("      |" + cube[5][0] + "|" + cube[5][1] + "|" + cube[5][2] + "|");
     	System.out.println("      |" + cube[5][3] + "|" + cube[5][4] + "|" + cube[5][5] + "|");
     	System.out.println("      |" + cube[5][6] + "|" + cube[5][7] + "|" + cube[5][8] + "|");
-    	System.out.println("\n\n");
+    	System.out.println("\n");
     }
     
+    /**
+     * Will make n random amounts of moves on the cube
+     * */
     public void randomize(int n) {
     	Random rand = new Random();
     	int r;
@@ -470,6 +478,9 @@ public class RubiksCube {
 //    	setColorDistances();
     }
     
+    /**
+     * used to make an exact copy of the cube
+     * */
     private void setCube(RubiksCube o) {
     	char[][] original = o.getCube();
     	for(int i = 0; i < 6; i++) {
@@ -480,6 +491,9 @@ public class RubiksCube {
     	
     }
     
+    /**
+     * Called when the user wants to copy the cube
+     * */
     public RubiksCube copy() {
     	RubiksCube c = new RubiksCube();
     	c.setCube(this);
@@ -560,24 +574,42 @@ public class RubiksCube {
     	return toReturn;
     }
 
+    /**
+     * Compares the rubik's cube and returns true if they are equal
+     * */
     public Boolean equals(RubiksCube c) {
     	return this.toString().equals(c.toString());
     }
     
+    /**
+     * Compares the String version of the cube and returns true if they are equal
+     * */
     public Boolean equalsString(String c) {
     	return this.toString().equals(c);
     }
 
     public char[][] getCube() {return cube;}
     
+    /**
+     * Returns the color at a given cube
+     * Takes just an index
+     * */
     public char getColorAt(int index) {
     	return cube[index / cube[0].length] [index % cube[0].length];
     }
     
+    /**
+     * Returns the color at a given cube
+     * Takes the index of the side and cube
+     * */
     public char getColorAt(int side, int num) {
     	return cube[side][num];
     }
     
+    /**
+     * Calculates the heuristic for A*
+     * For every misplaced cube add 2 (max amount of moves needed to get to the proper side)
+     * */
     public int heuristic() {
 		
     	int thisResult = 0;
@@ -591,9 +623,6 @@ public class RubiksCube {
     					thisResult += 2;
     				else
     					thisResult += 2;
-    				
-//    				if (thisResult > max)
-//    					max = thisResult;
     			}
     		}
     		
