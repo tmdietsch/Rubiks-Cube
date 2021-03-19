@@ -207,9 +207,9 @@ public class RubiksCube {
     	cube[5][3] = cube[3][5];
     	cube[5][6] = cube[3][2];
     	
-    	cube[3][8] = temp6;
+    	cube[3][8] = temp0;
     	cube[3][5] = temp3;
-    	cube[3][2] = temp0;
+    	cube[3][2] = temp6;
     }
     
     //index 1
@@ -588,9 +588,9 @@ public class RubiksCube {
     		for (int j = 0; j < cube[i].length; j++) {
     			if (! (cube[i][j] == temp && cube[i][j] == REFERENCE.cube[i][j])) {
     				if (j % 2 == 0)
-    					thisResult += 1;
+    					thisResult += 2;
     				else
-    					thisResult += 1;
+    					thisResult += 2;
     				
 //    				if (thisResult > max)
 //    					max = thisResult;

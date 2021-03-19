@@ -4,51 +4,65 @@ import java.util.ArrayList;
 
 public class Node implements Comparable<Node> {
     
-	String name;
-	
-    //where we were before the current node. Is null by default
-    Node parent;
-    //what is stored in the node
-    RubiksCube self;
-    //the children of the node
-    //ArrayList<Node> children;
+	String name;		//name of the node (comes from cube)
+    Node parent;		//parent node
+    RubiksCube self;	//cube represented by node
     
-    int cost;
-    int straightCost;
+    int cost;			//cost so far
+    int straightCost;	//cost if we move each color with no obstructions
     
+    /**
+     * Constructor
+     * 
+     * @param s
+     */
     Node(RubiksCube s){
-        parent = null;
-        self = s;
-        //children = new ArrayList<>();
-        name = s.toString();
+        parent = null;	//no parent
+        self = s;		//setting cube
+        name = s.toString();	//initializing name
         
-        straightCost = s.heuristic();
-        cost = 0;
+        straightCost = s.heuristic();	//calculating heuristic
+        cost = 0;						//calculating cost
     }
     
+    /**
+     * Constructor
+     * 
+     * @param s
+     * @param parent
+     */
     Node(RubiksCube s, Node parent){
-    	this.parent = parent;
-    	self = s;
-    	//children = new ArrayList
-    	name = s.toString();
+    	this.parent = parent;	//setting parent
+    	self = s;				//setting cube
+    	name = s.toString();	//initializing name
     	
-    	this.cost = 2 + parent.cost;
-    	this.straightCost = s.heuristic();
+    	this.cost = 1 + parent.cost;		//calculating cost
+    	this.straightCost = s.heuristic();	//calculating heuristic
     }
     
-//    public void addChild(Node c){
-//        c.setParent(this);
-//        children.add(c);
-//    }
-    
+    /**
+     * Sets the parent of the node
+     * 
+     * @param p
+     */
     public void setParent(Node p){
         parent = p;
     }
     
+    /**
+     * Gets the parent of the node
+     * 
+     * @return
+     */
     public Node getParent(){
         return parent;
     }
     
+    /**
+     * Gets the rubiks cube associated with the node
+     * 
+     * @return
+     */
     public RubiksCube getSelf(){
         return self;
     }

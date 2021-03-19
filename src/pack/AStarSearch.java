@@ -5,62 +5,77 @@ import java.util.PriorityQueue;
 
 public class AStarSearch {
 
+	//Move list in reference for addChildren method
 	private final char[] moveList = new char[] {'F', 'R', 'B', 'U', 'D', 'L'};
 	
-	private Node startingCube;
-	private PriorityQueue<Node> nodeKeys;
-	private HashSet<String> searchedNodes;
-	private int totalCost;
+	private Node startingCube;	//cube to start at
+	private PriorityQueue<Node> nodes;	//queue of nodes to be looked at
+	private HashSet<String> searchedNodes;	//all the nodes that have been searched
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param start
+	 */
 	public AStarSearch(RubiksCube start) {
 		startingCube = new Node(start);
-		nodeKeys = new PriorityQueue<>();
+		nodes = new PriorityQueue<>();
 		searchedNodes = new HashSet<>();
-		totalCost = -1;
 	}
 	
+	/**
+	 * Main searching algorithm for A*
+	 * 
+	 * @return
+	 */
 	public String startSearch() {
 		
+		//Setting the current cube with the starting cube
 		Node currentCube = startingCube;
 
-		int num = 0;
+		int num = 0;	//number of times gone through the while loop for debugging
 		while(currentCube.getSelf().heuristic() != 0) {
-			addChildren(currentCube);
+			addChildren(currentCube);	//add all the children from the parent
 			
-			num++;
-			if (num % 10000 == 0)
-				System.out.println(nodeKeys.size() + ", " + num);
+			num++;	//increment
+			if (num % 10000 == 0)	//show results every 10000 increments
+				System.out.println("Searched Node Size: " + nodes.size() +
+						", Number of increments: " + num);
 			
-			if (num % 100000 == 0)
-				currentCube.getSelf().printCube();
-			
-			currentCube = nodeKeys.remove();
+			currentCube = nodes.remove();	//remove head of priority queue
 		}
 		
-		currentCube.getSelf().printCube();
+		currentCube.getSelf().printCube();	//print the resulting cube once done
 		
-		return currentCube.toString();
+		return currentCube.toString();	//return the string of the cube
 	}
 	
-	public int getPathCost() {
-		return totalCost;
-	}
-	
+	/**
+	 * Adds all the children of the parent to searchedNodes and
+	 * priority queue nodes
+	 * 
+	 * @param parent
+	 */
 	private void addChildren(Node parent) {
 		
+		int numMoves = 2;	//For each direction a move can go
 		
-		int numMoves = 2;
-		
+		//add the parent to the list of searched nodes
 		searchedNodes.add(parent.toString());
 		
+		//Iterate through the moveList
 		for (char c : moveList) {
 			
+			//Iterate through direction of move
 			for (int i = 0; i < numMoves; i++) {
+				
+				//Get the cube from the resulting move
 				RubiksCube rCube = parent.getSelf().move_copy(c, i);
 				String str = rCube.toString();
 				
+				//Add it to our lists if not added yet
 				if (!searchedNodes.contains(str)) {
-					nodeKeys.add(new Node(rCube, parent));
+					nodes.add(new Node(rCube, parent));
 					searchedNodes.add(str);
 				}
 			}
