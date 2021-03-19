@@ -521,10 +521,10 @@ public class RubiksCube implements Comparable<RubiksCube> {
     	System.out.println("      |" + cube[5][6].color + "|" + cube[5][7].color + "|" + cube[5][8].color + "|");
     }
     
-    public void randomize() {
+    public void randomize(int n) {
     	Random rand = new Random();
     	int r;
-    	for(int i = 0; i < 10; i++) {
+    	for(int i = 0; i < n; i++) {
     		r = rand.nextInt(12);
     		switch(r) {
     		
