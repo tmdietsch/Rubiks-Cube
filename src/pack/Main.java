@@ -67,7 +67,7 @@ public class Main {
     	aStar.startSearch();
     	
     	//Run both algorithms after making 6 moves on the cube
-    	//Runtime for this is decently longer than the others
+    	//Commented BFS out as it begins to take an unreasonable amount of time
     	cube = new RubiksCube();
     	System.out.println("Random move selected 6 times");
     	cube.randomize(6);
@@ -81,21 +81,12 @@ public class Main {
     	aStar = new AStarSearch(cube);
     	aStar.startSearch();
     	
-//    	RubiksCube aCube = new RubiksCube();
-//    	
-//    	aCube.move_B();
-//    	aCube.move_D();
-//    	aCube.move_L();
-//    	aCube.move_Bp();
-//    	aCube.move_F();
-//    	aCube.move_U();
-//    	aCube.move_Dp();
     	
     	//Run both algorithms after making 7 moves on the cube
-    	//Runtime for this amount of moves is often unreasonable
+    	//Commented BFS out as it takes an unreasonable amount of time
     	cube = new RubiksCube();
     	System.out.println("Random move selected 7 times");
-    	cube.randomize(10);
+    	cube.randomize(7);
     	cube.printCube();
     	
 //    	System.out.println("Breadth First Search");
@@ -105,5 +96,39 @@ public class Main {
     	System.out.println("A* Search");
     	aStar = new AStarSearch(cube);
     	aStar.startSearch();
+    	
+    	//Run A* after making 8 moves on the cube
+    	cube = new RubiksCube();
+    	System.out.println("Random move selected 8 times");
+    	cube.randomize(8);
+    	cube.printCube();
+    	
+    	
+    	System.out.println("A* Search");
+    	aStar = new AStarSearch(cube);
+    	aStar.startSearch();
+    	
+    	//Run A* after making 9 moves on the cube
+    	cube = new RubiksCube();
+    	System.out.println("Random move selected 9 times");
+    	cube.randomize(9);
+    	cube.printCube();
+    	
+    	
+    	System.out.println("A* Search");
+    	aStar = new AStarSearch(cube);
+    	aStar.startSearch();
+    	
+    	//Run A* after making 10 moves on the cube
+    	//Commented out due to frequently unreasonable run times
+//    	cube = new RubiksCube();
+//    	System.out.println("Random move selected 10 times");
+//    	cube.randomize(10);
+//    	cube.printCube();
+//    	
+//    	
+//    	System.out.println("A* Search");
+//    	aStar = new AStarSearch(cube);
+//    	aStar.startSearch();
     }
 }

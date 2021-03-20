@@ -98,7 +98,7 @@ public class BreadthFirstSearch {
 			//Keeps count of how many states we have searched
 			count++;
 			if(count%10000 == 0) {
-				System.out.println("Nodes searched " + count);
+				System.out.println("Approx Searched Node Size: " + count);
 			}
 			
 		}
