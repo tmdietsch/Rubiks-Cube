@@ -1,6 +1,5 @@
 package pack;
-
-
+//Tim Dietsch and Carly Williams
 public class Node implements Comparable<Node> {
     
 	String name;		//name of the node (comes from cube)

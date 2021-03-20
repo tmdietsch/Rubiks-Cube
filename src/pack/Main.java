@@ -1,5 +1,5 @@
 package pack;
-
+//Tim Dietsch and Carly Williams
 import java.util.Timer;
 
 public class Main {
